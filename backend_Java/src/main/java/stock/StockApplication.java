@@ -12,7 +12,11 @@ import stock.repository.CategoriaRepository;
 import stock.repository.MovimientoStockRepository;
 import stock.repository.ProductoRepository;
 import stock.repository.UsuarioRepository;
+import stock.service.CategoriaService;
+import stock.service.ProductoService;
+import stock.service.UsuarioService;
 
+import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -24,42 +28,15 @@ public class StockApplication {
 	}
 	//Dice a spring que tiene que ejecutar lo siguiente
 	@Bean
-
-	//Ejecuta este codigo cuando la aplicacion arranca
-	CommandLineRunner initData(CategoriaRepository categoriaRepository,
-							   ProductoRepository productoRepository,
-							   UsuarioRepository usuarioRepository,
-							   MovimientoStockRepository movimientoStockRepository) {
-		return args -> {
-
-			//Crear categoria
-			Categoria categoria = new Categoria();
-			categoria.setNombre("Bebidas");
-			categoriaRepository.save(categoria);
-
-			//Crear producto
-			Producto p1 = new Producto();
-			p1.setNombre("Coca-Cola");
-			p1.setPrecio(1.5);
-			p1.setStockActual(50);
-			p1.setStockMinimo(5);
-			p1.setCategoria(categoria);
-			productoRepository.save(p1);
-
-			//Crear usuario
-			Usuario u1 = new Usuario();
-			u1.setNombre("Jose");
-			u1.setRol("ADMIN");
-			usuarioRepository.save(u1);
-
-			//Crear movimiento
-			MovimientoStock ms1 = new MovimientoStock();
-			ms1.setTipo("ENTRADA");
-			ms1.setCantidad(50);
-			ms1.setFecha(LocalDateTime.now());
-			ms1.setProducto(p1);
-			ms1.setUsuario(u1);
-			movimientoStockRepository.save(ms1);
+	CommandLineRunner initData(CategoriaRepository categoriaRepository, CategoriaService categoriaService, ProductoService productoService, UsuarioService usuarioService) {
+		return (args) -> {
+			usuarioService.añadir(new Usuario("Diego", "ADMIN"));
+			usuarioService.añadir(new Usuario("Roberto", "Usuario"));
+			usuarioService.obtenerUsuarios().forEach((u) -> {
+				PrintStream var10000 = System.out;
+				String var10001 = u.getNombre();
+				var10000.println(var10001 + " | Rol: " + u.getRol());
+			});
 		};
 	}
 
