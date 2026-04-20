@@ -13,6 +13,7 @@ import stock.repository.MovimientoStockRepository;
 import stock.repository.ProductoRepository;
 import stock.repository.UsuarioRepository;
 import stock.service.CategoriaService;
+import stock.service.MovimientoStockService;
 import stock.service.ProductoService;
 import stock.service.UsuarioService;
 
@@ -26,18 +27,6 @@ public class StockApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StockApplication.class, args); //Arranca la aplicacion
 	}
-	//Dice a spring que tiene que ejecutar lo siguiente
-	@Bean
-	CommandLineRunner initData(CategoriaRepository categoriaRepository, CategoriaService categoriaService, ProductoService productoService, UsuarioService usuarioService) {
-		return (args) -> {
-			usuarioService.añadir(new Usuario("Diego", "ADMIN"));
-			usuarioService.añadir(new Usuario("Roberto", "Usuario"));
-			usuarioService.obtenerUsuarios().forEach((u) -> {
-				PrintStream var10000 = System.out;
-				String var10001 = u.getNombre();
-				var10000.println(var10001 + " | Rol: " + u.getRol());
-			});
-		};
-	}
-
+	
 }
+
