@@ -28,7 +28,7 @@ public class StockApplication extends Application {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
 
 		//JavaFX usa SP para crear los controllers
-		loader.setControllerFactory(SpringBootContext::getBean);
+		loader.setControllerFactory(ContextoSpring.getContexto()::getBean);
 
 		Scene scene = new Scene(loader.load());
 		stage.setScene(scene);

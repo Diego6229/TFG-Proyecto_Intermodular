@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stock.controller.FormularioController">
+   <children>
+      <Label text="Añadir nuevo producto" textFill="#1565c0">
+         <font>
+            <Font name="Segoe UI Bold" size="24.0" />
+         </font>
+      </Label>
+      <VBox maxWidth="540.0" prefHeight="65.0" prefWidth="540.0" spacing="5.0">
+         <children>
+            <Label text="Nombre" />
+            <TextField fx:id="txtNombre" prefWidth="200.0" promptText="Nombre del producto" />
+         </children>
+      </VBox>
+      <HBox prefHeight="65.0" prefWidth="570.0" spacing="10.0">
+         <children>
+            <VBox maxWidth="265.0" prefHeight="100.0" prefWidth="360.0" spacing="5.0">
+               <children>
+                  <Label text="Precio (€)" />
+                  <TextField fx:id="txtPrecio" prefWidth="200.0" promptText="0,00" />
+               </children>
+            </VBox>
+            <VBox maxWidth="265.0" prefHeight="100.0" prefWidth="360.0" spacing="5.0">
+               <children>
+                  <Label text="Catgeroia" />
+                  <ComboBox fx:id="cmbCategoria" prefWidth="269.0" promptText="Seleccionar categoria" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="65.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <VBox maxWidth="265.0" prefHeight="100.0" prefWidth="360.0" spacing="5.0">
+               <children>
+                  <Label text="Stock actual" />
+                  <TextField fx:id="txtStockActual" prefWidth="200.0" promptText="0" />
+               </children>
+            </VBox>
+            <VBox maxWidth="265.0" prefHeight="100.0" prefWidth="360.0" spacing="5.0">
+               <children>
+                  <Label text="Stock mínimo" />
+                  <TextField fx:id="txtStockMinimo" prefWidth="200.0" promptText="0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox maxWidth="200.0" prefHeight="50.0" prefWidth="300.0" spacing="10.0">
+         <children>
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelar" style="-fx-background-color: e74c3c;" text="Cancelar" textFill="WHITE" />
+            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#guardar" style="-fx-background-color: #1565C0;" text="Guardar producto" textFill="WHITE" />
+         </children>
+         <VBox.margin>
+            <Insets left="350.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+   <padding>
+      <Insets left="30.0" top="30.0" />
+   </padding>
+</VBox>
