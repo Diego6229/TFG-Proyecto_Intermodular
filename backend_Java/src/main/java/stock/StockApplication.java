@@ -1,32 +1,47 @@
 package stock;
 
-import org.springframework.boot.CommandLineRunner;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import stock.model.Categoria;
-import stock.model.MovimientoStock;
-import stock.model.Producto;
-import stock.model.Usuario;
-import stock.repository.CategoriaRepository;
-import stock.repository.MovimientoStockRepository;
-import stock.repository.ProductoRepository;
-import stock.repository.UsuarioRepository;
-import stock.service.CategoriaService;
-import stock.service.MovimientoStockService;
-import stock.service.ProductoService;
-import stock.service.UsuarioService;
-
-import java.io.PrintStream;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-public class StockApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(StockApplication.class, args); //Arranca la aplicacion
+//Arranca SP y JavaFX
+public class StockApplication extends Application {
+
+	//Guardar contexto de Spring
+	private ConfigurableApplicationContext SpringBootContext;
+
+	//metodo que se ejecuta antes de abrir la ventana
+	@Override
+	public void init() {
+		SpringBootContext = SpringApplication.run(StockApplication.class);
 	}
-	
+
+	//metodo que se ejecuta cuando JavaFX esta listo
+	@Override
+	public void start(Stage stage) throws Exception {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+
+		//JavaFX usa SP para crear los controllers
+		loader.setControllerFactory(SpringBootContext::getBean);
+
+		Scene scene = new Scene(loader.load());
+		stage.setScene(scene);
+		stage.setTitle("Stock Application");
+		stage.show();
+	}
+
+	//metodo que se ejecuta al cerrar la app
+	@Override
+	public void stop() throws Exception {
+		SpringBootContext.close();
+	}
+
+
 }
 
